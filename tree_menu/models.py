@@ -1,7 +1,4 @@
 from django.db import models
-"""
-ЗАПОЛНИТЬ ДОКСТРИНГ ПОЗЖЕ
-"""
 
 
 class Node(models.Model):

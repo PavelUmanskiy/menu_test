@@ -14,12 +14,6 @@ def draw_menu(context, name):
         names_list.remove('')
 
     nodes = Node.objects.select_related('parent').filter(Q(name=name) | Q(related_menu__name=name))
-
-    
-    # if name == 'main_menu':
-    #     nodes = list(Node.objects.select_related('parent').filter(Q(name=name) | Q(name__in=names_list) | Q(parent__name__in=names_list)))
-    # else:
-    #     nodes = list(Node.objects.select_related('parent').filter(Q(name=name) | Q(parent__name=name)))
         
     return_value = {
         'nodes': nodes,
