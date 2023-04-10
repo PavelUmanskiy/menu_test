@@ -4,10 +4,8 @@ from django.db import models
 """
 class Node(models.Model):
     name = models.CharField(max_length=72, default='')
-    children = models.ManyToManyField(to='Node', blank=True)
+    parent = models.ForeignKey(to='Node', blank=True, on_delete=models.CASCADE, null=True)
+    url = models.URLField(default='/')
 
-
-class Menu(models.Model):
-    name = models.CharField(max_length=72, default='Default Menu Name')
-    root_node = models.ForeignKey(to='Node', on_delete=models.SET_NULL,
-                                  null=True)
+    def __str__(self) -> str:
+        return self.name

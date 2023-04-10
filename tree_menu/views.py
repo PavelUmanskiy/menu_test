@@ -22,12 +22,12 @@ def all_categories_view(request):
     return render(request=request, template_name='all_categories.html',
                   context=context)
 
-def category_view(request):
+def category_view(request, category):
     context = {'url_cursor': request.path}
     return render(request=request, template_name='category.html',
                   context=context)
 
-def category_object_view(request):
+def category_object_view(request, category, pk):
     context = {'url_cursor': request.path}
     return render(request=request, template_name='category_object.html',
                   context=context)

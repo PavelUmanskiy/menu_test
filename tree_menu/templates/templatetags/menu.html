@@ -1,5 +1,27 @@
-{% for node in menu_list %}
-    {% if not node.parent_node %}
-        
+<!--Название меню-->
+{% for node in nodes %}
+    {% if node.parent is None %}
+        {{ node.name }}
     {% endif %}
 {% endfor %}
+<!--Само меню-->
+{% if menu_name == 'main_menu' %}
+{% for name in names_list %}
+    {% for node in nodes %}
+        {% if node.name == name%}
+            <p>IN LIST: <a href="{% url 'index' %}">{{ node.name }}</a></p>
+            {% for child in nodes %}
+                {% if child.parent == node and child.name not in names_list %}
+                    <p>CHILD: {{child.name}}</p>    
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% else %}
+    {% for node in nodes %}
+        {% if node.name != menu_name %}
+            <p>SECONDARY MENU'S FIRST GENERATION CHILD: {{ node.name }}
+        {% endif %}
+    {% endfor %}
+{% endif %}

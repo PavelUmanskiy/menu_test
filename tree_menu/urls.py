@@ -15,6 +15,6 @@ urlpatterns = [
     path('home/contacts/', contacts_view, name='contacts'),
     path('home/categories/', all_categories_view, name='all_categories'),
     path('home/categories/<slug:category>/', category_view, name='category'),
-    path('home/categories/<slug:category>/<slug:object>/', category_object_view,
+    path('home/categories/<slug:category>/<int:pk>/', category_object_view,
          name='category_object'),
 ]
