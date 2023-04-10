@@ -5,23 +5,22 @@
     {% endif %}
 {% endfor %}
 <!--Само меню-->
-{% if menu_name == 'main_menu' %}
 {% for name in names_list %}
     {% for node in nodes %}
         {% if node.name == name%}
-            <p>IN LIST: <a href="{% url 'index' %}">{{ node.name }}</a></p>
+            <p>IN LIST: <a href="{{node.url}}">{{ node.name }}</a></p>
             {% for child in nodes %}
                 {% if child.parent == node and child.name not in names_list %}
-                    <p>CHILD: {{child.name}}</p>    
+                    <p>CHILD: <a href="{{child.url}}">{{child.name}}</a></p>    
+                {% endif %}
+            {% endfor %}
+        {% elif forloop.parentloop.counter == 1 and forloop.counter == 1%}
+            {% for child in nodes %}
+                {% if child.parent == node and child.name not in names_list %}
+                    <p>CHILD: <a href="{{child.url}}">{{child.name}}</a></p>    
                 {% endif %}
             {% endfor %}
         {% endif %}
     {% endfor %}
 {% endfor %}
-{% else %}
-    {% for node in nodes %}
-        {% if node.name != menu_name %}
-            <p>SECONDARY MENU'S FIRST GENERATION CHILD: {{ node.name }}
-        {% endif %}
-    {% endfor %}
-{% endif %}
+<hr>
