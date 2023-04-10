@@ -6,8 +6,6 @@ from tree_menu.models import *
 
 register = template.Library()
 
-symbols = "├ ─ │ └"
-
 
 @register.inclusion_tag('templatetags/menu.html', takes_context=True)
 def draw_menu(context, name):
@@ -28,6 +26,7 @@ def draw_menu(context, name):
         'context': context,
         'names_list': names_list,
         'menu_name': name,
-        'menu_to_display': None
     }
     return return_value
+
+

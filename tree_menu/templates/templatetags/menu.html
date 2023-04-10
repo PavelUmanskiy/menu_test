@@ -1,3 +1,4 @@
+{% load margin_mult %}
 <!--Название меню-->
 {% for node in nodes %}
     {% if node.parent is None %}
@@ -8,16 +9,23 @@
 {% for name in names_list %}
     {% for node in nodes %}
         {% if node.name == name%}
-            <p>IN LIST: <a href="{{node.url}}">{{ node.name }}</a></p>
+            {% if forloop.counter == 2 %}
+                <p style="margin-top:0px;margin-bottom:0px;margin-left:12px;">{{node.symbol}}<a href="{{node.url}}">{{ node.name }}</a></p>
+            {% else %}
+                <p style="margin-top:0px;margin-bottom:0px;margin-left:{% margin_multiplicator forloop_counter=forloop.parentloop.counter %}px;">{{node.symbol}}<a href="{{node.url}}">parent {{ node.name }}</a></p>
+            {% endif %}
             {% for child in nodes %}
                 {% if child.parent == node and child.name not in names_list %}
-                    <p>CHILD: <a href="{{child.url}}">{{child.name}}</a></p>    
+                    <p style="margin-top:0px;margin-bottom:0px;margin-left:{% margin_multiplicator forloop_counter=forloop.parentloop.counter decrement=0%}px;">{{child.symbol}}<a href="{{child.url}}">child {{child.name}}</a></p>    
                 {% endif %}
             {% endfor %}
+
+
+
         {% elif forloop.parentloop.counter == 1 and forloop.counter == 1%}
             {% for child in nodes %}
                 {% if child.parent == node and child.name not in names_list %}
-                    <p>CHILD: <a href="{{child.url}}">{{child.name}}</a></p>    
+                    <p style="margin-top:0px;margin-bottom:0px;">└ <a href="{{child.url}}">{{child.name}}</a></p>    
                 {% endif %}
             {% endfor %}
         {% endif %}
